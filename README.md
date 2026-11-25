@@ -68,7 +68,7 @@ Qualquer outro tipo de arquivo (`.txt`, `.pdf`, etc.) é ignorado e **não** é 
 Para que `removeimage` funcione em qualquer pasta, a pasta do projeto precisa estar no PATH. Isso já foi configurado. Se precisar refazer, rode uma vez no PowerShell:
 
 ```powershell
-[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";C:\Users\Davi Guedes\Desktop\removeimage", "User")
+[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";C:\Users\'User '\Desktop\removeimage", "User")
 ```
 
 Depois feche e abra o terminal (ou o VS Code inteiro).
@@ -80,7 +80,7 @@ Depois feche e abra o terminal (ou o VS Code inteiro).
 Para mudar a pasta alvo ou os tipos de arquivo, edite o início de `removeimage.py`:
 
 ```python
-PASTA = Path(r"C:\Users\Davi Guedes\Pictures\Screenshots")
+PASTA = Path(r"C:\Users\'User'\Pictures\Screenshots")
 
 EXTENSOES = { ".png", ".jpg", ... }
 ```
