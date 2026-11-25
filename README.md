@@ -3,7 +3,7 @@
 Script em Python que apaga automaticamente **prints, imagens e vídeos** da pasta de capturas de tela do Windows:
 
 ```
-C:\Users\Davi Guedes\Pictures\Screenshots
+C:\Users\<seu usuário>\Pictures\Screenshots
 ```
 
 ## Requisitos
@@ -19,6 +19,8 @@ Nenhuma biblioteca externa é necessária.
 |---|---|
 | `removeimage.py` | O programa principal |
 | `removeimage.bat` | Atalho que permite rodar só `removeimage` no terminal |
+| `install.ps1` | Instalador (baixa o programa e coloca no PATH) |
+| `uninstall.ps1` | Desinstalador |
 | `README.md` | Este arquivo |
 
 ## Como usar
@@ -63,27 +65,30 @@ Pronto! 3 arquivo(s) apagado(s).
 
 Qualquer outro tipo de arquivo (`.txt`, `.pdf`, etc.) é ignorado e **não** é apagado.
 
-## Instalação (comando global)
+## Instalação (uma linha)
 
-Para que `removeimage` funcione em qualquer pasta, a pasta do projeto precisa estar no PATH. Isso já foi configurado. Se precisar refazer, rode uma vez no PowerShell:
+Abra o **PowerShell** e cole:
 
 ```powershell
-[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";C:\Users\'User '\Desktop\removeimage", "User")
+irm https://raw.githubusercontent.com/daviguedes-dev/removeimage-/main/install.ps1 | iex
 ```
 
-Depois feche e abra o terminal (ou o VS Code inteiro).
+O instalador:
+1. Confere se o Python está instalado
+2. Baixa o programa para `%LOCALAPPDATA%\removeimage`
+3. Adiciona essa pasta ao PATH do seu usuário (não precisa de administrador)
 
-> Se você mover ou renomear a pasta `removeimage`, atualize o caminho no PATH.
+Depois feche e abra o terminal e use `removeimage` normalmente. Para **atualizar**, basta rodar o mesmo comando de novo.
+
+### Desinstalar
+
+```powershell
+irm https://raw.githubusercontent.com/daviguedes-dev/removeimage-/main/uninstall.ps1 | iex
+```
 
 ## Configuração
 
-Para mudar a pasta alvo ou os tipos de arquivo, edite o início de `removeimage.py`:
-
-```python
-PASTA = Path(r"C:\Users\'User'\Pictures\Screenshots")
-
-EXTENSOES = { ".png", ".jpg", ... }
-```
+A pasta de Screenshots é detectada automaticamente para o usuário atual (inclusive quando a pasta Imagens está no OneDrive). Para mudar os tipos de arquivo, edite `EXTENSOES` no início de `removeimage.py`.
 
 ## ⚠️ Atenção
 

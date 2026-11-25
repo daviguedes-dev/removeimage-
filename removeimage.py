@@ -9,10 +9,37 @@ Uso:
 """
 
 import argparse
+import os
 import sys
 from pathlib import Path
 
-PASTA = Path(r"C:\Users\Davi Guedes\Pictures\Screenshots")
+
+def pasta_screenshots() -> Path:
+    """Descobre a pasta Screenshots do usuário atual (inclusive se Imagens estiver no OneDrive)."""
+    candidatas = []
+    try:
+        import winreg
+        with winreg.OpenKey(
+            winreg.HKEY_CURRENT_USER,
+            r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders",
+        ) as chave:
+            # GUID da pasta "Screenshots" e depois a pasta "Imagens"
+            for nome, sufixo in (("{B7BEDE81-DF94-4682-A7D8-57A52620B86F}", ""), ("My Pictures", "Screenshots")):
+                try:
+                    valor, _ = winreg.QueryValueEx(chave, nome)
+                    candidatas.append(Path(os.path.expandvars(valor)) / sufixo)
+                except OSError:
+                    pass
+    except ImportError:
+        pass
+    candidatas.append(Path.home() / "Pictures" / "Screenshots")
+    for c in candidatas:
+        if c.is_dir():
+            return c
+    return candidatas[0]
+
+
+PASTA = pasta_screenshots()
 
 EXTENSOES = {
     # imagens
