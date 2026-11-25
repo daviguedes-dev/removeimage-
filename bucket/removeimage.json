@@ -1,0 +1,26 @@
+{
+    "version": "1.0.1",
+    "description": "Apaga prints, imagens e vídeos da pasta Screenshots do Windows.",
+    "homepage": "https://github.com/daviguedes-dev/removeimage-",
+    "license": "Unknown",
+    "suggest": {
+        "Python": "python"
+    },
+    "url": [
+        "https://raw.githubusercontent.com/daviguedes-dev/removeimage-/v1.0.1/removeimage.py",
+        "https://raw.githubusercontent.com/daviguedes-dev/removeimage-/v1.0.1/removeimage.bat"
+    ],
+    "hash": [
+        "03ac52872daa9f74ab318f83cf867e8f6e6471503ea40083f06a085c54c2751a",
+        "8d5e7226d6c66d03d0ef6f0f706e062be52b2c597f9bb94144751efff02d9f6c"
+    ],
+    "bin": "removeimage.bat",
+    "notes": "Requer Python 3.8+. Teste com: removeimage --dry-run",
+    "checkver": "github",
+    "autoupdate": {
+        "url": [
+            "https://raw.githubusercontent.com/daviguedes-dev/removeimage-/v$version/removeimage.py",
+            "https://raw.githubusercontent.com/daviguedes-dev/removeimage-/v$version/removeimage.bat"
+        ]
+    }
+}

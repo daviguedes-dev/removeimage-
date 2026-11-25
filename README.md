@@ -21,6 +21,7 @@ Nenhuma biblioteca externa é necessária.
 | `removeimage.bat` | Atalho que permite rodar só `removeimage` no terminal |
 | `install.ps1` | Instalador (baixa o programa e coloca no PATH) |
 | `uninstall.ps1` | Desinstalador |
+| `bucket/removeimage.json` | Manifesto do Scoop |
 | `README.md` | Este arquivo |
 
 ## Como usar
@@ -85,6 +86,30 @@ Depois feche e abra o terminal e use `removeimage` normalmente. Para **atualizar
 ```powershell
 irm https://raw.githubusercontent.com/daviguedes-dev/removeimage-/main/uninstall.ps1 | iex
 ```
+
+### Alternativa: Scoop
+
+Se você usa o gerenciador de pacotes [Scoop](https://scoop.sh):
+
+```powershell
+scoop bucket add removeimage https://github.com/daviguedes-dev/removeimage-
+scoop install removeimage
+```
+
+Atualizar: `scoop update removeimage` · Remover: `scoop uninstall removeimage`
+
+> O Scoop não instala o Python sozinho. Se precisar: `scoop install python`.
+
+### Publicar uma nova versão (para o mantenedor)
+
+1. Faça o commit das mudanças e crie a tag: `git tag v1.0.2` e depois `git push origin main v1.0.2`
+2. Atualize `bucket/removeimage.json`: troque `version`, as URLs (`v1.0.2`) e os `hash`. O SHA-256 de cada arquivo sai com:
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/daviguedes-dev/removeimage-/v1.0.2/removeimage.py | sha256sum
+   ```
+3. Faça o commit e o push do manifesto.
+
+O instalador de uma linha (`install.ps1`) sempre baixa da branch `main`, então ele não precisa de nenhuma alteração.
 
 ## Configuração
 
